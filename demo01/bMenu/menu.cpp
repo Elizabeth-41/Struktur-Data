@@ -1,42 +1,48 @@
 #include <iostream>
-#include <conio.h> // Untuk fungsi getch()
+#include <conio.h>
 using namespace std;
 
+int data[100]; // Array untuk menyimpan data
+int n = 0;     // Jumlah data
+
 void dMenu() {
-    system("cls"); // Membersihkan layar
+    system("cls");
     cout << "Aplikasi Tampilan Menu" << endl;
-    cout << "1. Menu Pertama" << endl;
-    cout << "2. Menu Kedua" << endl;
-    cout << "3. Menu Ketiga" << endl;
-    cout << "4. Menu Keempat" << endl;
-    cout << "5. Exit" << endl;
+    cout << "1. Masukkan Data" << endl;
+    cout << "2. Tampilkan Data" << endl;
+    cout << "3. Exit" << endl;
     cout << "Masukkan angka: ";
 }
 
 int main() {
     char pilihan;
+
     do {
         dMenu();
-        pilihan = getch(); // Membaca input user tanpa menekan Enter
+        pilihan = getch();
 
         switch (pilihan) {
             case '1':
-                cout << "Anda memilih Menu Pertama." << endl;
-                getch(); // Menunggu user menekan tombol
+                system("cls");
+                cout << "Masukkan jumlah data: ";
+                cin >> n;
+                for (int i = 0; i < n; i++) {
+                    cout << "Masukkan data ke-" << i + 1 << ": ";
+                    cin >> data[i];
+                }
+                cout << "Data berhasil disimpan." << endl;
+                getch();
                 break;
             case '2':
-                cout << "Anda memilih Menu Kedua." << endl;
+                system("cls");
+                cout << "Data yang Anda masukkan:" << endl;
+                for (int i = 0; i < n; i++) {
+                    cout << data[i] << " ";
+                }
+                cout << endl;
                 getch();
                 break;
             case '3':
-                cout << "Anda memilih Menu Ketiga." << endl;
-                getch();
-                break;
-            case '4':
-                cout << "Anda memilih Menu Keempat." << endl;
-                getch();
-                break;
-            case '5':
                 cout << "Keluar dari aplikasi." << endl;
                 break;
             default:
@@ -44,7 +50,7 @@ int main() {
                 getch();
                 break;
         }
-    } while (pilihan != '5'); // Keluar jika memilih opsi 5
+    } while (pilihan != '3');
 
     return 0;
 }
