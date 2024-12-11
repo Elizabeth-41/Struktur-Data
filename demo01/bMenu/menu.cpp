@@ -1,97 +1,107 @@
 #include <iostream>
-#include <string>
+#include <conio.h>
 using namespace std;
 
-// Fungsi tukar
-void tukar(int* a, int* b) {
+int n; // Variabel global untuk menyimpan jumlah elemen
+
+void tukar(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
 }
 
-// Bubble Sort (Ascending)
-void bubble_sort_asc(int* data, int n) {
-    for (int i = 1; i < n; i++) {
-        for (int j = n - 1; j >= i; j--) {
-            if (*(data + j) < *(data + j - 1)) {
-                tukar((data + j), (data + j - 1));
-            }
-        }
-    }
+void dMenu() {
+    system("cls");
+    cout << "Aplikasi Sorting Bubble" << "\n";
+    cout << "1. Masukkan data" << "\n";
+    cout << "2. Tampilkan data" << "\n";
+    cout << "3. Sorting ASC" << "\n";
+    cout << "4. Sorting DSC" << "\n";
+    cout << "5. Exit" << "\n";
+    cout << "Masukkan angka: ";
 }
 
-// Bubble Sort (Descending)
-void bubble_sort_desc(int* data, int n) {
-    for (int i = 1; i < n; i++) {
-        for (int j = 0; j < n - i; j++) {
-            if (*(data + j) < *(data + j + 1)) {
-                tukar((data + j), (data + j + 1));
-            }
-        }
-    }
+void mPertama(string pesan) {
+    system("cls");
+    cout << "Halo, saya menu " << pesan;
+    getch();
 }
 
 int main() {
-    int* data = new int[100];
-    int n;
+    int data[100]; // Variabel lokal untuk menyimpan data array
+    char pl;
 
-    while (true) {
-        cout << "Aplikasi Tampilan Menu\n";
-        cout << "1. Menu Pertama\n";
-        cout << "2. Menu Kedua\n";
-        cout << "3. Menu Ketiga\n";
-        cout << "4. Sorting Array\n";
-        cout << "5. Exit\n";
-        cout << "Masukkan pilihan: ";
-        char pilihan;
-        cin >> pilihan;
-
-        if (pilihan == '4') {
-            cout << "Masukkan jumlah elemen array: ";
-            cin >> n;
-            if (n <= 0) {
-                cout << "Jumlah elemen harus lebih dari 0! Kembali ke menu utama...\n";
-                continue;
-            }
-
-            for (int i = 0; i < n; i++) {
-                cout << "Masukkan elemen ke-" << (i + 1) << ": ";
-                cin >> *(data + i);
-            }
-
-            cout << "Pilih urutan: 1 = Ascending, 2 = Descending: ";
-            char sort_order;
-            cin >> sort_order;
-
-            if (sort_order == '1') {
-                bubble_sort_asc(data, n);
-                cout << "Array setelah diurutkan (Ascending): ";
-            } else if (sort_order == '2') {
-                bubble_sort_desc(data, n);
-                cout << "Array setelah diurutkan (Descending): ";
-            } else {
-                cout << "Pilihan tidak valid. Kembali ke menu utama...\n";
-                continue;
-            }
-
-            for (int i = 0; i < n; i++) {
-                cout << *(data + i) << " ";
-            }
-            cout << endl;
-
-        } else if (pilihan == '5') {
-            break;
-        } else if (pilihan >= '1' && pilihan <= '3') {
-            cout << "Hallo, saya menu ke-" << pilihan << endl;
-        } else {
-            cout << "Pilihan tidak tersedia.\n";
+    do {
+        dMenu();
+        pl = getch();
+        switch (pl) {
+            case '1':
+                system("cls");
+                cout << "Masukkan jumlah data: ";
+                cin >> n;
+                if (n > 100) {
+                    cout << "Jumlah data tidak boleh lebih dari 100.\n";
+                    n = 100;
+                }
+                for (int i = 0; i < n; i++) {
+                    cout << "Masukkan elemen ke-" << i + 1 << ": ";
+                    cin >> data[i];
+                }
+                cout << "Data berhasil dimasukkan.\n";
+                getch();
+                break;
+            case '2':
+                system("cls");
+                cout << "Data yang dimasukkan: \n";
+                for (int i = 0; i < n; i++) {
+                    cout << data[i] << " ";
+                }
+                cout << "\nTekan tombol apa saja untuk kembali...";
+                getch();
+                break;
+            case '3':
+                system("cls");
+                // Sorting ASC (Bubble Sort)
+                for (int i = 0; i < n - 1; i++) {
+                    for (int j = 0; j < n - i - 1; j++) {
+                        if (data[j] > data[j + 1]) {
+                            tukar(&data[j], &data[j + 1]);
+                        }
+                    }
+                }
+                cout << "Data telah diurutkan secara ASC:\n";
+                for (int i = 0; i < n; i++) {
+                    cout << data[i] << " ";
+                }
+                cout << "\nTekan tombol apa saja untuk kembali...";
+                getch();
+                break;
+            case '4':
+                system("cls");
+                // Sorting DSC (Bubble Sort)
+                for (int i = 0; i < n - 1; i++) {
+                    for (int j = 0; j < n - i - 1; j++) {
+                        if (data[j] < data[j + 1]) {
+                            tukar(&data[j], &data[j + 1]);
+                        }
+                    }
+                }
+                cout << "Data telah diurutkan secara DSC:\n";
+                for (int i = 0; i < n; i++) {
+                    cout << data[i] << " ";
+                }
+                cout << "\nTekan tombol apa saja untuk kembali...";
+                getch();
+                break;
+            case '5':
+                break;
+            default:
+                system("cls");
+                cout << "Pilihan Tidak Tersedia\nTekan tombol apa saja untuk melanjutkan...";
+                getch();
+                break;
         }
+    } while (pl != '5');
 
-        cout << "Tekan Enter untuk melanjutkan...\n";
-        cin.ignore();
-        cin.get();
-    }
-
-    delete[] data;
     return 0;
 }
