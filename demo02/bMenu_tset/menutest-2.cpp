@@ -127,3 +127,46 @@ void hapusData() {
     pos--; // Kurangi jumlah data
     cout << "Data berhasil dihapus!\n";
 }
+int main() {
+    int pilihan;
+    do {
+        clearScreen();
+        cout << "Menu CRUD:\n";
+        cout << "1. Masukkan Data\n";
+        cout << "2. Tampilkan Semua Data\n";
+        cout << "3. Perbarui Data\n";
+        cout << "4. Hapus Data\n";
+        cout << "5. Keluar\n";
+        cout << "Pilihan: ";
+        cin >> pilihan;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Membersihkan input buffer
+
+        switch (pilihan) {
+        case 1:
+            masukanData();
+            break;
+        case 2:
+            tampilkanSemuaData();
+            break;
+        case 3:
+            perbaruiData();
+            break;
+        case 4:
+            hapusData();
+            break;
+        case 5:
+            cout << "Keluar dari program.\n";
+            break;
+        default:
+            cout << "Pilihan tidak valid.\n";
+            break;
+        }
+
+        if (pilihan != 5) {
+            cout << "\nTekan Enter untuk kembali ke menu...";
+            cin.get();
+        }
+    } while (pilihan != 5);
+
+    return 0;
+}
