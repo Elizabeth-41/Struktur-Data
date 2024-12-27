@@ -41,3 +41,22 @@ void masukanData() {
     cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Membersihkan input buffer
     cout << "Data berhasil ditambahkan!\n";
 }
+// Fungsi untuk menampilkan semua data mahasiswa
+void tampilkanSemuaData() {
+    clearScreen();
+    if (pos == -1) { // Jika tidak ada data
+        cout << "Belum ada data yang dimasukkan.\n";
+        return;
+    }
+
+    cout << "Data Mahasiswa:\n";
+    cout << "------------------------------------\n";
+    for (int i = 0; i <= pos; i++) {
+        cout << "Data ke-" << i + 1 << ":\n";
+        cout << "NIM     : " << sikc[i].nim << endl;
+        cout << "Nama    : " << sikc[i].nama << endl;
+        cout << "Alamat  : " << sikc[i].alamat << endl;
+        cout << "IPK     : " << sikc[i].ipk << endl;
+        cout << "------------------------------------\n";
+    }
+}
