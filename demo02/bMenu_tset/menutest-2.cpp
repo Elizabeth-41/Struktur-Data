@@ -60,3 +60,70 @@ void tampilkanSemuaData() {
         cout << "------------------------------------\n";
     }
 }
+// Fungsi untuk memperbarui data mahasiswa berdasarkan indeks
+void perbaruiData() {
+    clearScreen();
+    if (pos == -1) {
+        cout << "Belum ada data yang dimasukkan.\n";
+        return;
+    }
+
+    int index;
+    cout << "Masukkan indeks data yang ingin diperbarui (1-" << pos + 1 << "): ";
+    cin >> index;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Membersihkan input buffer
+
+    if (index < 1 || index > pos + 1) {
+        cout << "Indeks tidak valid.\n";
+        return;
+    }
+
+    index--; // Penyesuaian indeks array
+
+    cout << "Data lama:\n";
+    cout << "NIM     : " << sikc[index].nim << endl;
+    cout << "Nama    : " << sikc[index].nama << endl;
+    cout << "Alamat  : " << sikc[index].alamat << endl;
+    cout << "IPK     : " << sikc[index].ipk << endl;
+
+    cout << "\nMasukkan data baru:\n";
+    cout << "Masukan NIM: ";
+    getline(cin, sikc[index].nim);
+    cout << "Masukan Nama: ";
+    getline(cin, sikc[index].nama);
+    cout << "Masukan Alamat: ";
+    getline(cin, sikc[index].alamat);
+    cout << "Masukan IPK: ";
+    cin >> sikc[index].ipk;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Membersihkan input buffer
+
+    cout << "Data berhasil diperbarui!\n";
+}
+
+// Fungsi untuk menghapus data mahasiswa berdasarkan indeks
+void hapusData() {
+    clearScreen();
+    if (pos == -1) {
+        cout << "Belum ada data yang dimasukkan.\n";
+        return;
+    }
+
+    int index;
+    cout << "Masukkan indeks data yang ingin dihapus (1-" << pos + 1 << "): ";
+    cin >> index;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Membersihkan input buffer
+
+    if (index < 1 || index > pos + 1) {
+        cout << "Indeks tidak valid.\n";
+        return;
+    }
+
+    index--; // Penyesuaian indeks array
+
+    for (int i = index; i < pos; i++) {
+        sikc[i] = sikc[i + 1];
+    }
+
+    pos--; // Kurangi jumlah data
+    cout << "Data berhasil dihapus!\n";
+}
